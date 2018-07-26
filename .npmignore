@@ -1,0 +1,11 @@
+.babelrc
+.eslintrc
+.gitattributes
+.lintstagedrc
+.prettierrc
+*.iml
+*.lock
+*.log
+
+.idea
+src
