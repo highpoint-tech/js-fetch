@@ -48,7 +48,7 @@ const doPost = (url, { method = 'POST', headers = {}, ...otherArgs } = {}) =>
   doFetch(url, {
     method,
     headers: {
-      'X-CSRF-Token': getCookieValue('CSRFToken'), // Send CSRF token
+      'X-CSRF-Token': getCookieValue('CSRFCookie'), // Send CSRF token
       ...headers
     },
     ...otherArgs
