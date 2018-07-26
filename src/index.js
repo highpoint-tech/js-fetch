@@ -48,7 +48,7 @@ const doPost = (url, { method = 'POST', headers = {}, ...otherArgs } = {}) =>
   doFetch(url, {
     method,
     headers: {
-      'X-CSRF-Token': getCookieValue('CSRFToken'),
+      'X-CSRF-Token': getCookieValue('CSRFToken'), // Send CSRF token
       ...headers
     },
     ...otherArgs
@@ -63,8 +63,15 @@ const doFormPost = (url, { headers = {}, ...otherArgs } = {}) =>
     ...otherArgs
   });
 
+// Set postDataBin if it has not already been set
+const getBinaryURL = url => {
+  if (/[?&]postDataBin=/.test(url)) return url;
+  const separator = url.indexOf('?') === -1 ? '?' : '&';
+  return url + separator + 'postDataBin=y';
+};
+
 const doJSONPost = (url, { headers = {}, ...otherArgs } = {}) =>
-  doPost(url, {
+  doPost(getBinaryURL(url), {
     headers: {
       'Content-Type': 'application/json',
       ...headers
