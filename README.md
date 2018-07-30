@@ -16,7 +16,7 @@ Also included are some HighPoint-specific requirements like CSRF support and
 
 ## Usage
 
-GET request
+### GET request
 
 ```javascript
 import { json } from '@highpoint/js-fetch';
@@ -31,7 +31,7 @@ import { json } from '@highpoint/js-fetch';
 })();
 ```
 
-POST Form
+### POST Form
 
 ```javascript
 import { postForm } from '@highpoint/js-fetch';
@@ -49,7 +49,7 @@ import { postForm } from '@highpoint/js-fetch';
 
 ```
 
-POST JSON
+### POST JSON
 
 ```javascript
 import { postJSON } from '@highpoint/js-fetch';
@@ -69,3 +69,26 @@ import { postJSON } from '@highpoint/js-fetch';
 })();
 
 ```
+
+### Using `<base>` HREF
+
+```html
+...
+<base href="https://ps.example.com/psc/csdev/EMPLOYEE/SA/s/WEBLIB.ISCRIPT1.FieldFormula.IScript_Main">
+...
+```
+
+```javascript
+import { json } from '@highpoint/js-fetch';
+
+(async () => {
+  try {
+    const jsonResponse = await json('TermOptions');
+    console.log(jsonResponse);
+  } catch (e) {
+    // Handle the exception
+  }
+})();
+```
+
+GET request would be made to `https://ps.example.com/psc/csdev/EMPLOYEE/SA/s/WEBLIB.ISCRIPT1.FieldFormula.IScript_TermOptions`.

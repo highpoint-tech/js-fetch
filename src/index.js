@@ -10,6 +10,7 @@ const isFramed = (() => {
   }
 })();
 
+// @link https://stackoverflow.com/a/25490531/719817
 const getCookieValue = name => {
   const match = document.cookie.match(`(^|;)\\s*${name}\\s*=\\s*([^;]+)`);
   return match ? match.pop() : '';
