@@ -1,6 +1,6 @@
 const baseURI = (
   document.baseURI || document.querySelector('base').href
-).replace('IScript_Main', 'IScript_');
+).replace(/IScript_.*/, 'IScript_');
 
 const isFramed = (() => {
   try {
