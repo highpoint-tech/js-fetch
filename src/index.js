@@ -20,8 +20,12 @@ const checkResponse = async response => {
   const isOK =
     !response.headers.has('x-status-code') ||
     parseInt(response.headers.get('x-status-code'), 10) < 300;
-  if (response.ok && isOK) return response.json();
-  throw await response.json();
+  if (response.headers.get('content-type').indexOf('application/json') > -1) {
+    if (response.ok && isOK) return response.json();
+    throw await response.json();
+  }
+  if (response.ok && isOK) return response.text();
+  throw await response.text();
 };
 
 const doFetch = (
