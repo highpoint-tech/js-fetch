@@ -94,3 +94,8 @@ export const postJSON = async (...args) => {
   const response = await doJSONPost(...args);
   return checkResponse(response);
 };
+
+export const postRaw = async (url, args) => {
+  const response = await doPost(getBinaryURL(url), args);
+  return checkResponse(response);
+};
