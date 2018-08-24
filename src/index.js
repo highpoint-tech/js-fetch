@@ -26,7 +26,7 @@ const checkResponse = async response => {
   }
   const responseText = await response.text();
   if (response.ok && isOK) {
-    const authFailed = responseText.indexOf('Authorization Error') !== -1;
+    const authFailed = responseText.indexOf('Authorization Error') > -1;
     if (authFailed) throw new Error('Authorization Error');
     return responseText;
   }

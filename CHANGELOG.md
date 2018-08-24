@@ -1,3 +1,6 @@
+# v1.0.1
+* Throw exception on authorization errors
+
 # v1.0.0
 * Add function to post raw, non-JSON content.
 * Only parse JSON if response declares it to be JSON. Otherwise return body as
