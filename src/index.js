@@ -24,8 +24,13 @@ const checkResponse = async response => {
     if (response.ok && isOK) return response.json();
     throw await response.json();
   }
-  if (response.ok && isOK) return response.text();
-  throw await response.text();
+  const responseText = await response.text();
+  if (response.ok && isOK) {
+    const authFailed = responseText.indexOf('Authorization Error') !== -1;
+    if (authFailed) throw new Error('Authorization Error');
+    return responseText;
+  }
+  throw responseText;
 };
 
 const doFetch = (
