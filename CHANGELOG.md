@@ -1,3 +1,6 @@
+# v1.1.0
+* Throw exception when device is offline
+
 # v1.0.1
 * Throw exception on authorization errors
 

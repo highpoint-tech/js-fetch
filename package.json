@@ -1,6 +1,6 @@
 {
   "name": "@highpoint/js-fetch",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "HighPoint Fetch Library",
   "main": "dist/js-fetch.js",
   "repository": {
