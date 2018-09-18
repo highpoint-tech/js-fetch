@@ -1,3 +1,6 @@
+# v2.0.0
+* Export ES modules instead of CommonJS
+
 # v1.1.0
 * Throw exception when device is offline
 
