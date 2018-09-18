@@ -1,6 +1,8 @@
-const baseURI = (
-  document.baseURI || document.querySelector('base').href
-).replace(/IScript_.*/, 'IScript_');
+const getBaseURI = () =>
+  (document.baseURI || document.querySelector('base').href).replace(
+    /IScript_.*/,
+    'IScript_'
+  );
 
 const isFramed = (() => {
   try {
@@ -50,7 +52,7 @@ const doFetch = (
     window.parent.postMessage('is-active', '*'); // Let parent know child is active
   }
   if (isOffline()) throw new Error('Network Error. Are you offline?');
-  return fetch(url.indexOf('http') === 0 ? url : baseURI + url, {
+  return fetch(url.indexOf('http') === 0 ? url : getBaseURI() + url, {
     method,
     credentials,
     headers: { accept, ...headers },
