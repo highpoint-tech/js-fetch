@@ -16,6 +16,9 @@ const getCookieValue = name => {
   return match ? match.pop() : '';
 };
 
+const isOffline = () =>
+  'onLine' in window.navigator && !window.navigator.onLine;
+
 const checkResponse = async response => {
   const isOK =
     !response.headers.has('x-status-code') ||
@@ -46,6 +49,7 @@ const doFetch = (
   if (isFramed) {
     parent.postMessage('is-active', '*'); // Let parent know child is active
   }
+  if (isOffline()) throw new Error('Network Error. Are you offline?');
   return fetch(url.indexOf('http') === 0 ? url : baseURI + url, {
     method,
     credentials,
