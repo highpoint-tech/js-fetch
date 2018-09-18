@@ -31,6 +31,6 @@
     "lint": "eslint .",
     "prebuild": "mkdirp dist",
     "precommit": "lint-staged",
-    "prepare": "run-s clean build"
+    "prepack": "run-s clean build"
   }
 }
