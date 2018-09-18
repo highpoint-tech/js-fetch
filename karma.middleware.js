@@ -1,25 +1,33 @@
+/* eslint-disable func-names, no-underscore-dangle */
 const queryString = require('query-string');
 
-// eslint-disable-next-line func-names
 module.exports = function() {
-  // eslint-disable-next-line func-names
-  return function({ _parsedUrl: url }, response) {
-    const query = queryString.parse(url.query);
+  return function(request, response) {
+    let body = '';
+    request.on('data', chunk => {
+      body += chunk.toString(); // convert Buffer to string
+    });
+    request.on('end', () => {
+      const query = queryString.parse(request._parsedUrl.query);
+      const params = queryString.parse(body);
 
-    if ('status' in query) {
-      response.setHeader('Content-Type', 'application/json');
-      response.setHeader('X-Status-Code', query.status);
-    }
+      if ('status' in query) {
+        response.setHeader('Content-Type', 'application/json');
+        response.setHeader('X-Status-Code', query.status);
+      }
 
-    let responseText;
+      let responseText;
 
-    switch (url.pathname) {
-      case '/json':
-        responseText = JSON.stringify({ message: query.message || 'test' });
-        break;
-      default:
-    }
+      switch (request._parsedUrl.pathname) {
+        case '/json':
+          responseText = JSON.stringify({
+            message: query.message || params.message || 'test'
+          });
+          break;
+        default:
+      }
 
-    response.end(responseText);
+      response.end(responseText);
+    });
   };
 };
