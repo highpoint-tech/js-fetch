@@ -1,3 +1,7 @@
+# v2.0.1
+* Retrieve `baseURI` before each request so if `<base href>` changes, the change
+  will take effect.
+
 # v2.0.0
 * Export ES modules instead of CommonJS
 
