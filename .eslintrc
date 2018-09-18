@@ -1,12 +1,12 @@
 {
-  "extends": ["prettier"],
+  "env": {
+    "browser": true
+  },
+  "extends": ["@highpoint", "prettier"],
   "parser": "babel-eslint",
   "parserOptions": {
     "ecmaFeatures": {
       "experimentalObjectRestSpread": true
     }
-  },
-  "env": {
-    "browser": true
   }
 }

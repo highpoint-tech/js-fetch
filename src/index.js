@@ -47,7 +47,7 @@ const doFetch = (
   } = {}
 ) => {
   if (isFramed) {
-    parent.postMessage('is-active', '*'); // Let parent know child is active
+    window.parent.postMessage('is-active', '*'); // Let parent know child is active
   }
   if (isOffline()) throw new Error('Network Error. Are you offline?');
   return fetch(url.indexOf('http') === 0 ? url : baseURI + url, {
@@ -81,7 +81,7 @@ const doFormPost = (url, { headers = {}, ...otherArgs } = {}) =>
 const getBinaryURL = url => {
   if (/[?&]postDataBin=/.test(url)) return url;
   const separator = url.indexOf('?') === -1 ? '?' : '&';
-  return url + separator + 'postDataBin=y';
+  return `${url + separator}postDataBin=y`;
 };
 
 const doJSONPost = (url, { headers = {}, ...otherArgs } = {}) =>
