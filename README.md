@@ -57,10 +57,10 @@ import { postJSON } from '@highpoint/js-fetch';
 (async () => {
   try {
     const jsonResponse = await postJSON('https://api.example.com', {
-      body: JSON.stringify({
+      body: {
         value1: 1,
         value2: 2
-      })
+      }
     });
     console.log(jsonResponse);
   } catch (e) {
