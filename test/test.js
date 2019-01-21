@@ -1,4 +1,4 @@
-import { json, postForm } from '../src/index.js';
+import { json, postJSON, postForm } from '../src/index.js';
 
 const doesItThrow = async fn => {
   let threwError = true;
@@ -28,7 +28,7 @@ describe('fetch', () => {
   describe('#json()', () => {
     it('should return json', async () => {
       const response = await json('json?status=200&message=success');
-      assert.equal('success', response.message);
+      assert.strictEqual(response.message, 'success');
     });
 
     it('should error', async () => {
@@ -41,7 +41,30 @@ describe('fetch', () => {
       const response = await postForm('json?status=200', {
         body: 'message=success'
       });
-      assert.equal('success', response.message);
+      assert.strictEqual(response.message, 'success');
+    });
+  });
+
+  describe('#postJSON()', () => {
+    it('should return sent message', async () => {
+      const response = await postJSON('postJSON?status=200', {
+        body: {
+          message: 'awesome'
+        }
+      });
+      assert.strictEqual(response.message, 'awesome');
+    });
+    it('should work with stringified body', async () => {
+      const response = await postJSON('postJSON?status=200', {
+        body: JSON.stringify({
+          message: 'awesome'
+        })
+      });
+      assert.strictEqual(response.message, 'awesome');
+    });
+    it('should work without options', async () => {
+      const response = await postJSON('postJSON?status=200');
+      assert.strictEqual(response.message, 'no-body');
     });
   });
 });

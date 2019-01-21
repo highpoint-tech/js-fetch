@@ -86,12 +86,13 @@ const getBinaryURL = url => {
   return `${url + separator}postDataBin=y`;
 };
 
-const doJSONPost = (url, { headers = {}, ...otherArgs } = {}) =>
+const doJSONPost = (url, { body, headers = {}, ...otherArgs } = {}) =>
   doPost(getBinaryURL(url), {
     headers: {
       'Content-Type': 'application/json',
       ...headers
     },
+    body: typeof body === 'string' ? body : JSON.stringify(body),
     ...otherArgs
   });
 

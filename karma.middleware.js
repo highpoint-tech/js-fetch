@@ -17,11 +17,15 @@ module.exports = function() {
       }
 
       let responseText;
-
       switch (request._parsedUrl.pathname) {
         case '/json':
           responseText = JSON.stringify({
             message: query.message || params.message || 'test'
+          });
+          break;
+        case '/postJSON':
+          responseText = JSON.stringify({
+            message: body ? JSON.parse(body).message : 'no-body'
           });
           break;
         default:
