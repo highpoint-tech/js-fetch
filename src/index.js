@@ -92,7 +92,7 @@ const doJSONPost = (url, { body, headers = {}, ...otherArgs } = {}) =>
       'Content-Type': 'application/json',
       ...headers
     },
-    body: JSON.stringify(body),
+    body: typeof body === 'string' ? body : JSON.stringify(body),
     ...otherArgs
   });
 
