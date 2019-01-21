@@ -19,14 +19,14 @@ module.exports = function() {
       let responseText;
       switch (request._parsedUrl.pathname) {
         case '/json':
-          try {
-            const jsonBody = JSON.parse(body); // if parsing body does not throw, we're posting a JSON
-            responseText = JSON.stringify({ message: jsonBody.message });
-          } catch (_err) {
-            responseText = JSON.stringify({
-              message: query.message || params.message || 'test'
-            });
-          }
+          responseText = JSON.stringify({
+            message: query.message || params.message || 'test'
+          });
+          break;
+        case '/postJSON':
+          responseText = JSON.stringify({
+            message: body ? JSON.parse(body).message : 'no-body'
+          });
           break;
         default:
       }

@@ -47,16 +47,24 @@ describe('fetch', () => {
 
   describe('#postJSON()', () => {
     it('should return sent message', async () => {
-      const response = await postJSON('json?status=200', {
+      const response = await postJSON('postJSON?status=200', {
         body: {
           message: 'awesome'
         }
       });
       assert.strictEqual(response.message, 'awesome');
     });
+    it('should work with stringified body', async () => {
+      const response = await postJSON('postJSON?status=200', {
+        body: JSON.stringify({
+          message: 'awesome'
+        })
+      });
+      assert.strictEqual(response.message, 'awesome');
+    });
     it('should work without options', async () => {
-      const response = await postJSON('json?status=200');
-      assert.strictEqual(response.message, 'test');
+      const response = await postJSON('postJSON?status=200');
+      assert.strictEqual(response.message, 'no-body');
     });
   });
 });
