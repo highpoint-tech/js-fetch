@@ -28,7 +28,7 @@ describe('fetch', () => {
   describe('#json()', () => {
     it('should return json', async () => {
       const response = await json('json?status=200&message=success');
-      assert.equal('success', response.message);
+      assert.strictEqual('success', response.message);
     });
 
     it('should error', async () => {
@@ -41,7 +41,7 @@ describe('fetch', () => {
       const response = await postForm('json?status=200', {
         body: 'message=success'
       });
-      assert.equal('success', response.message);
+      assert.strictEqual('success', response.message);
     });
   });
 
