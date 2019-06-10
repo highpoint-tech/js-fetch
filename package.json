@@ -5,7 +5,7 @@
   "main": "dist/js-fetch.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com:hp-mobile/js-fetch.git"
+    "url": "git+https://github.com:highpoint-tech/js-fetch.git"
   },
   "author": "HighPoint <support@mhighpoint.com>",
   "license": "MIT",
