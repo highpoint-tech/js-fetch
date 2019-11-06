@@ -6,6 +6,7 @@ const getBaseURI = () =>
 
 const isFramed = (() => {
   try {
+    if (self.window === undefined) return false;
     return window.self !== window.top;
   } catch (e) {
     return true;
@@ -18,8 +19,14 @@ const getCookieValue = name => {
   return match ? match.pop() : '';
 };
 
-const isOffline = () =>
-  'onLine' in window.navigator && !window.navigator.onLine;
+const getDefaultHeaders = () => {
+  if (self.document === undefined) return undefined;
+  return {
+    'X-CSRF-Token': getCookieValue('CSRFCookie') // Send CSRF token
+  };
+};
+
+const isOffline = () => 'onLine' in navigator && !navigator.onLine;
 
 const checkResponse = async response => {
   const isOK =
@@ -64,7 +71,7 @@ const doPost = (url, { method = 'POST', headers = {}, ...otherArgs } = {}) =>
   doFetch(url, {
     method,
     headers: {
-      'X-CSRF-Token': getCookieValue('CSRFCookie'), // Send CSRF token
+      ...getDefaultHeaders(),
       ...headers
     },
     ...otherArgs
@@ -96,22 +103,24 @@ const doJSONPost = (url, { body, headers = {}, ...otherArgs } = {}) =>
     ...otherArgs
   });
 
-export const json = async (...args) => {
+const json = async (...args) => {
   const response = await doFetch(...args);
   return checkResponse(response);
 };
 
-export const postForm = async (...args) => {
+const postForm = async (...args) => {
   const response = await doFormPost(...args);
   return checkResponse(response);
 };
 
-export const postJSON = async (...args) => {
+const postJSON = async (...args) => {
   const response = await doJSONPost(...args);
   return checkResponse(response);
 };
 
-export const postRaw = async (url, args) => {
+const postRaw = async (url, args) => {
   const response = await doPost(getBinaryURL(url), args);
   return checkResponse(response);
 };
+
+export { getBaseURI, getDefaultHeaders, json, postForm, postJSON, postRaw };
