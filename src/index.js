@@ -105,6 +105,8 @@ const doJSONPost = (url, { body, headers = {}, ...otherArgs } = {}) =>
 
 const json = async (...args) => {
   const response = await doFetch(...args);
+  if (!response.headers.get('content-type').includes('application/json'))
+    throw new Error('Response not in expected JSON format');
   return checkResponse(response);
 };
 
