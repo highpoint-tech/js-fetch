@@ -1,4 +1,7 @@
+const { highpoint: { 'x-server-url': xServerUrl } = {} } = self.window;
+
 const getBaseURI = () =>
+  xServerUrl ||
   (document.baseURI || document.querySelector('base').href).replace(
     /IScript_.*/,
     'IScript_'
