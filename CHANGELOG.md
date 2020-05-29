@@ -1,3 +1,7 @@
+# v3.1.0
+
+- Added functionality to override the `<base>` url of the page with the bootstrap field `window.highpoint.dataURI`
+
 # v2.1.0
 
 - postJSON now accepts _also_ an object as the body

@@ -92,3 +92,7 @@ import { json } from '@highpoint/js-fetch';
 ```
 
 GET request would be made to `https://ps.example.com/psc/csdev/EMPLOYEE/SA/s/WEBLIB.ISCRIPT1.FieldFormula.IScript_TermOptions`.
+
+### Overriding the `<base>` HREF
+
+The baseURI of the page can be overridden for requests made using js-fetch. If the value `window.highpoint.dataURI` is added to the global javascript namespace of the window, that url will be used instead of the `<base>` of the page.
