@@ -7,6 +7,11 @@ const getBaseURI = () =>
     'IScript_'
   );
 
+const getUrlOrRedirect = url =>
+  dataURI && url.includes('IScript_')
+    ? url.replace(/.*IScript_/, dataURI)
+    : url;
+
 const isFramed = (() => {
   try {
     if (self.window === undefined) return false;
@@ -62,12 +67,15 @@ const doFetch = (
     window.parent.postMessage('is-active', '*'); // Let parent know child is active
   }
   if (isOffline()) throw new Error('Network Error. Are you offline?');
-  return fetch(url.indexOf('http') === 0 ? url : getBaseURI() + url, {
-    method,
-    credentials,
-    headers: { accept, ...headers },
-    ...otherArgs
-  });
+  return fetch(
+    url.indexOf('http') === 0 ? getUrlOrRedirect(url) : getBaseURI() + url,
+    {
+      method,
+      credentials,
+      headers: { accept, ...headers },
+      ...otherArgs
+    }
+  );
 };
 
 const doPost = (url, { method = 'POST', headers = {}, ...otherArgs } = {}) =>
