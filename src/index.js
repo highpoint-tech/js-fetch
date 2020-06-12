@@ -1,16 +1,14 @@
 const { highpoint: { dataURI } = {} } = self.window;
 
-const getBaseURI = () =>
-  dataURI ||
-  (document.baseURI || document.querySelector('base').href).replace(
-    /IScript_.*/,
-    'IScript_'
-  );
+const getBaseURI = () => {
+  const baseURI = (
+    document.baseURI || document.querySelector('base').href
+  ).replace(/IScript_.*/, 'IScript_');
+  return dataURI ? baseURI.replace(/.*\//, dataURI) : baseURI;
+};
 
 const getUrlOrRedirect = url =>
-  dataURI && url.includes('IScript_')
-    ? url.replace(/.*IScript_/, dataURI)
-    : url;
+  dataURI && url.includes('IScript_') ? url.replace(/.*\//, dataURI) : url;
 
 const isFramed = (() => {
   try {
