@@ -1,6 +1,6 @@
 {
   "name": "@highpoint/js-fetch",
-  "version": "3.1.0",
+  "version": "3.2.0",
   "description": "HighPoint Fetch Library",
   "main": "dist/js-fetch.js",
   "repository": {
@@ -17,7 +17,7 @@
     "@babel/cli": "^7.0.0",
     "@babel/core": "^7.0.0",
     "@babel/plugin-transform-runtime": "^7.8.3",
-    "@babel/preset-env": "^7.0.0",
+    "@babel/preset-env": "^7.10.4",
     "@highpoint/eslint-config": "^0.1.1",
     "babel-eslint": "^10.0.1",
     "chai": "^4.1.2",

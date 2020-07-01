@@ -36,7 +36,11 @@ const checkResponse = async response => {
     !response.headers.has('x-status-code') ||
     parseInt(response.headers.get('x-status-code'), 10) < 300;
   if (response.headers.get('content-type').indexOf('application/json') > -1) {
-    if (response.ok && isOK) return response.json();
+    if (response.ok && isOK) {
+      const responseJson = await response.json();
+      if (responseJson?.error) throw new Error(responseJson.error);
+      return responseJson;
+    }
     throw await response.json();
   }
   const responseText = await response.text();
