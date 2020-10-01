@@ -1,3 +1,9 @@
+# v4.0.0
+
+### POTENTIALLY BREAKING CHANGE
+
+- On each fetch, the postMessage call will pass an object instead of a string (prevents PT_COMMON error)
+
 # v3.1.0
 
 - Added functionality to override the `<base>` url of the page with the bootstrap field `window.highpoint.dataURI`
