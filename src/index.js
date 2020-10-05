@@ -1,4 +1,4 @@
-const { highpoint: { dataURI } = {} } = window || {};
+const { highpoint: { dataURI } = {} } = self.window;
 
 const getBaseURI = () =>
   dataURI ||
@@ -9,7 +9,7 @@ const getBaseURI = () =>
 
 const isFramed = (() => {
   try {
-    if (window.self === undefined) return false;
+    if (self.window === undefined) return false;
     return window.self !== window.top;
   } catch (e) {
     return true;
