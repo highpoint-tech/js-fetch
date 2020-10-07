@@ -56,7 +56,7 @@ const doFetch = (
   } = {}
 ) => {
   if (isFramed) {
-    window.parent.postMessage('is-active', '*'); // Let parent know child is active
+    window.parent.postMessage({ type: 'is-active' }, '*'); // Let parent know child is active
   }
   if (isOffline()) throw new Error('Network Error. Are you offline?');
   return fetch(url.indexOf('http') === 0 ? url : getBaseURI() + url, {
