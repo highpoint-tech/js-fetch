@@ -1,3 +1,7 @@
+# v4.1.0
+
+- Allow non-JSON return if 'Accept' request header is not 'application/json'
+
 # v4.0.0
 
 ### POTENTIALLY BREAKING CHANGE
