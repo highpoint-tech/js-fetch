@@ -1,3 +1,7 @@
+# v4.2.0
+
+- Revert 4.1.0, use postRaw instead
+
 # v4.1.0
 
 - Allow non-JSON return if 'Accept' request header is not 'application/json'
